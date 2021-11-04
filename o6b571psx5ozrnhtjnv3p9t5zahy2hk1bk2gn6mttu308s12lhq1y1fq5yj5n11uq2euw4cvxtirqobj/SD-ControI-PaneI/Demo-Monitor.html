@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>聖鯛水產科技－監測管理系統</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css?v=5" />
+	</head>
+	 <script>
+		function myFunc0() { // 首頁
+		parent.frames['mainframe'].location='index.html';
+      }
+       function myFunc1() { // 水質監控
+         parent.frames['mainframe'].location='Demo-Water-Quality.html';
+      } 
+	  function myFunc2() { // SD監控
+         parent.frames['mainframe'].location='Demo-SD-H-Monitor.html';
+      }
+	  function myFunc3() { // 工廠監控
+         parent.frames['mainframe'].location='Demo-Factory-H-Monitor.html';
+      }
+     </script>
+	<body class="homepage is-preload">
+	
+		<div id="page-wrapper">
+			<!-- Nav -->
+				<nav id="nav">
+					<ul>
+						<li class="current"> <a href="javascript:myFunc0()" id="logo">聖鯛水產科技</a></li>
+						<!--<li><a onClick="parent.frames['mainframe'].location='http://cloud.deneng.com.tw/sd/'">水質監控</a></li>-->
+						<li><a href="javascript:myFunc1()">水質監控</a></li>
+						<!--<li><a onClick="parent.frames['mainframe'].location='https://sdat01.000webhostapp.com/web_e824kjs895s23984kljweorislfkx1827389743j4hsfshdfxv/index.php?v=2'">水位預警</a></li>-->
+						<li><a href="javascript:myFunc2()">SD監控</a></li>
+						<li><a href="javascript:myFunc3()">工廠監控</a></li>
+						<li><a href="#" >A場監控</a></li>
+						<li><a href="#" >B場監控</a></li><!--IP不可另開視窗-->
+						<li><a href="#" >SD環視</a></li><!--IP不可另開視窗-->
+						
+				        <!--<li><a onClick="window.open('SD-D-Monitor.html')" >SD環視</a></li>-->
+						<!--<li><a onClick="window.open('http://118.232.194.211/#Live')"><s>竹仔腳監控</s></a></li>-->
+					</ul>
+				</nav>
+
+			<!-- Main -->
+				<iframe src="index.html" name="mainframe" width="100%" height="650" > <!--style="position: relative;top:-8px;"-->
+				</iframe>
+
+		</div>
+	</body>
+	<!--
+	<script>
+		$(function(){
+		$('html, body').scrollTop(200);
+		});
+		
+	</script>
+	-->
+	
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+</html>
