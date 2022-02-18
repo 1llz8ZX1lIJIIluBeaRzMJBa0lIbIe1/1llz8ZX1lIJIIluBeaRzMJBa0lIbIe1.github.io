@@ -93,55 +93,75 @@
 						}
 						var feedMul = -1;
 						// 10萬尾
-						// 1-3天 1杯
-						// 4-6天 1.5杯
-						// 7-10天 3杯
+						//1-3: 200g = 兩杯, 早晚各一次
+						//4-6: 300g
+						//7-9: 600g
+						//10-12: 1000g
+						//13-15:1500g
 						switch (day) {
-							case -1:
+							case  0:
 								feedMul = -1;
-								break;
+								break;	
 							case 1:
-								feedMul = 1;
+								feedMul = 2;
 								break;
 							case 2:
-								feedMul = 1;
+								feedMul = 2;
 								break;
 							case 3:
-								feedMul = 1;
+								feedMul = 2;
 								break;
 							case 4:
-								feedMul = 1.5;
+								feedMul = 3;
 								break;
 							case 5:
-								feedMul = 1.5;
+								feedMul = 3;
 								break;
 							case 6:
-								feedMul = 1.5;
+								feedMul = 3;
 								break;
 							case 7:
-								feedMul = 3;
+								feedMul = 6;
 								break;
 							case 8:
-								feedMul = 3;
+								feedMul = 6;
 								break;
 							case 9:
-								feedMul = 3;
+								feedMul = 6;
 								break;
 							case 10:
-								feedMul = 3;
+								feedMul = 10;
+								break;
+							case 11:
+								feedMul = 10;
+								break;
+							case 12:
+								feedMul = 10;
+								break;
+							case 13:
+								feedMul = 15;
+								break;
+							case 14:
+								feedMul = 15;
+								break;
+							case 15:
+								feedMul = 15;
 								break;
 						}
 						if  (itemFishData.indexOf("萬尾")>=0)
 						{
-							feed = (/\d+(?=萬尾)/.exec(itemFishData) * feedMul * 0.1 ).toFixed(1)+ " cup";
+							if (day>15)
+							{
+								feed = "超過";
+							}
+							else
+							{
+								feed = (/\d+(?=萬尾)/.exec(itemFishData) * feedMul * 0.1 ).toFixed(1)+ " cup";
+							}
+							cell3.innerHTML= "<font color='#CE0000'><B>" + feed + "</B></font>";
+							cell4.innerHTML= itemDate + " (" + day+")";
+							cell5.innerHTML= itemFishData;
 						}
-						else 
-						{
-							feed="X";
-						}
-						cell3.innerHTML= "<font color='#CE0000'><B>" + feed + "</B></font>";
-						cell4.innerHTML= itemDate;
-						cell5.innerHTML= itemFishData;
 					 }
 					 
 				 }
@@ -201,8 +221,9 @@ position: -moz-sticky; position: -o-sticky; position: -ms-sticky; position: stic
           </tr>
         </thead>
       </table>
+		 <div align="CENTER">
+		<img src="images/base.png"></div>
 	  </div>
-	 
 </div><!-- /.container -->
 	
 </div>
