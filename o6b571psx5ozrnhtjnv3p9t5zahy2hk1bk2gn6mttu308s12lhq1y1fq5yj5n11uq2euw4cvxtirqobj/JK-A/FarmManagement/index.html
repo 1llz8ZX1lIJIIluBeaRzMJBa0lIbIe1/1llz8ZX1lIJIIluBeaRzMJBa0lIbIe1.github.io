@@ -1,0 +1,210 @@
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+    <!-- Bootstrap CSS -->
+	
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="3.2.0/css/bootstrap.min.css?v=3" rel="stylesheet" >
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" rel="stylesheet" >
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css" rel="stylesheet" >
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
+
+  <!-- Include the JavaScript file for Bootstrap table -->
+  <script src=
+"https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js">
+  </script>
+	<!-- 製作漸層背景 https://uigradients.com/#RedSunset -->
+	<style> 
+		body 
+		{
+			background: #43C6AC;  /* fallback for old browsers */
+			background: -webkit-linear-gradient(to right, #F8FFAE, #43C6AC);  /* Chrome 10-25, Safari 5.1-6 */
+			background: linear-gradient(to right, #F8FFAE, #43C6AC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+			  height: 100%;
+			  margin: 0;
+			  padding: 0;
+		}
+		#map {
+		  height: 285px;
+		  width: 100%;
+			margin: 0 auto; 
+		}
+		#divInfowindow
+		{
+			width: 100px;
+			margin: 0 auto; 
+		}
+		.highlight
+		{
+			background-color:#ff0000;
+		}
+	</style>
+    <title>A區飼料 - 聖鯛水產科技</title>
+	<script>
+	  
+		
+		let sheetJsonData;
+		
+		$.getJSON //https://sheets.googleapis.com/v4/spreadsheets/{spreadsheetId}/values/{range}?key={apiKey}
+			('https://sheets.googleapis.com/v4/spreadsheets/1FvCtikKepDxRIMGmcaANmRB2y7gdwcrdKWnMrcWzfUU/values/form?alt=json&key=AIzaSyD1nv9DyD6XvqVI3MUg1j2l_yKUNl8FjUY', 
+			function(data) {
+				sheetJsonData = data;
+				let tableRef = document.getElementById("tableID");
+				
+				 let tableLength = tableRef.rows.length;
+				for (var i=1; i<tableLength; i++) {
+					tableRef.deleteRow(1);
+				}
+				
+				for (i = 1; i < sheetJsonData.values.length ; i++) 
+				{
+					var  itemNum = sheetJsonData.values[i][0];
+					var  itemId = sheetJsonData.values[i][1];
+					var  itemFishData =  sheetJsonData.values[i][2];
+					var  itemDate=  sheetJsonData.values[i][3];
+					
+					if ( itemId.length <= 4  && itemId.indexOf("建功A") >= 0 
+						&& itemId.indexOf("建功A9") != 0) {
+						var row = tableRef.insertRow();
+						var cell1 = row.insertCell(0);
+						cell1.style.display = 'none';
+						var cell2 = row.insertCell(1);
+						var cell3 = row.insertCell(2);
+						var cell4	= row.insertCell(3);
+						var cell5	= row.insertCell(4);
+						cell1.innerHTML = itemNum;
+						itemId = itemId.replace("建功","")
+						cell2.innerHTML= "<font color='#CE0000'><B>" + itemId + "</B></font>";
+						var feed="";
+						var day = -1;
+						
+						var d1=new Date(itemDate); //yyyy-mm-dd  
+						var d2=new Date(); //yyyy-mm-dd  
+						if (d2>=d1)
+						{
+							difference = d2 - d1;
+							day = Math.round(difference/(1000*60*60*24));
+						}
+						var feedMul = -1;
+						// 10萬尾
+						// 1-3天 1杯
+						// 4-6天 1.5杯
+						// 7-10天 3杯
+						switch (day) {
+							case -1:
+								feedMul = -1;
+								break;
+							case 1:
+								feedMul = 1;
+								break;
+							case 2:
+								feedMul = 1;
+								break;
+							case 3:
+								feedMul = 1;
+								break;
+							case 4:
+								feedMul = 1.5;
+								break;
+							case 5:
+								feedMul = 1.5;
+								break;
+							case 6:
+								feedMul = 1.5;
+								break;
+							case 7:
+								feedMul = 3;
+								break;
+							case 8:
+								feedMul = 3;
+								break;
+							case 9:
+								feedMul = 3;
+								break;
+							case 10:
+								feedMul = 3;
+								break;
+						}
+						if  (itemFishData.indexOf("萬尾")>=0)
+						{
+							feed = (/\d+(?=萬尾)/.exec(itemFishData) * feedMul * 0.1 ).toFixed(1)+ " cup";
+						}
+						else 
+						{
+							feed="X";
+						}
+						cell3.innerHTML= "<font color='#CE0000'><B>" + feed + "</B></font>";
+						cell4.innerHTML= itemDate;
+						cell5.innerHTML= itemFishData;
+					 }
+					 
+				 }
+			});
+		
+	</script>
+</head>
+<body>
+
+
+<div style="background-color:#ffffff; opacity: 0.5">
+		<p style="margin:6px;">
+			<font color="#000000" style="font-size:15pt"><CENTER>A區飼料 - 聖鯛水產科技</CENTER></font>
+		</p>
+		<p style="margin:12px;"></p>
+</div>
+
+<div class="container">
+
+	<div id="map" align="CENTER">
+	<img src="images/map.jpg" height="100%" height="100%" style="object-fit: cover;"></div><!-- //&callback=initMap-->
+	
+	<div style="height:400px;  position:relative; overflow:auto;margin-top:10px" >
+	  <table class="table table-hover table-light" style="font-size:10pt;-webkit-user-select:none;-moz-user-select:none;-o-user-select:none;user-select:none;" id="tableID">
+        <thead class="thead-dark">
+          <tr id="header-row">
+				<th data-field="num" style="width:20px; position: sticky;position: -webkit-sticky;
+position: -moz-sticky; position: -o-sticky; position: -ms-sticky; position: sticky; top: 0;display:none" >
+              <span >
+                #
+              </span>
+            </th>
+            <th data-field="id" style="width:80px; position: sticky;position: -webkit-sticky;
+position: -moz-sticky; position: -o-sticky; position: -ms-sticky; position: sticky; top: 0;">
+              <span >
+                No.
+              </span>
+            </th>
+				<th data-field="feed" style="position: sticky;position: -webkit-sticky;
+position: -moz-sticky; position: -o-sticky; position: -ms-sticky; position: sticky;   top: 0;">
+              <span>
+                Feed
+              </span>
+            </th>
+            <th data-field="name" style="position: sticky;position: -webkit-sticky;
+position: -moz-sticky; position: -o-sticky; position: -ms-sticky; position: sticky;   top: 0; " >
+              <span>
+                Date
+              </span>
+            </th>
+            <th data-field="date" style="width:100px; position: sticky;position: -webkit-sticky;
+position: -moz-sticky; position: -o-sticky; position: -ms-sticky; position: sticky; top: 0;">
+              <span>
+                Info
+              </span>
+            </th>
+          </tr>
+        </thead>
+      </table>
+	  </div>
+	 
+</div><!-- /.container -->
+	
+</div>
+</body>
+</html>
