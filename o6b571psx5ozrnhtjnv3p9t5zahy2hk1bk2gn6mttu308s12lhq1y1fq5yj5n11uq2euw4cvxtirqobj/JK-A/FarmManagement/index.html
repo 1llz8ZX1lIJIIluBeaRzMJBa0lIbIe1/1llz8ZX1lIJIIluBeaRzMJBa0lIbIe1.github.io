@@ -221,10 +221,10 @@
 						if  (itemFishData.indexOf("萬尾")>=0)
 						{
 							// 用300克的杯子
-							feed = (/\d+(?=萬尾)/.exec(itemFishData) * feedMul / 30 ).toFixed(1)+ " cup";
+							feed = (/\d+(?=萬尾)/.exec(itemFishData) * feedMul / 30 ).toFixed(1)+ "";
 							if (day>20)
 							{
-								feed += " 需搬池";
+								feed += " 搬池";
 							}
 							cell3.innerHTML= "<font color='#CE0000'><B>" + feed + "</B></font>";
 							cell4.innerHTML= itemDate + " (" + day+")";
@@ -290,7 +290,9 @@ position: -moz-sticky; position: -o-sticky; position: -ms-sticky; position: stic
         </thead>
       </table>
 		 <div align="CENTER">
-		<B><font size=5>Feed time：07:00、11:00、14:00 </B><!--<img src="images/base.png">--></div>
+		<font size=5><B>Feed time：07:00、11:00、14:00 </B></font><BR/>
+		<font size=1>規則：使用300克杯子，一天投餵三次。</font>
+		<!--<img src="images/base.png">--></div>
 	  </div>
 </div><!-- /.container -->
 	
