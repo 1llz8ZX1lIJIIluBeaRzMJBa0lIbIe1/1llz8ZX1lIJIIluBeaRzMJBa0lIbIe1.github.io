@@ -164,7 +164,8 @@
 							}
 							else
 							{
-								feed = (/\d+(?=萬尾)/.exec(itemFishData) * feedMul * 10 ).toFixed(0)+ "克";
+								// 用300克的杯子
+								feed = (/\d+(?=萬尾)/.exec(itemFishData) * feedMul / 30 ).toFixed(1)+ " cup";
 							}
 							cell3.innerHTML= "<font color='#CE0000'><B>" + feed + "</B></font>";
 							cell4.innerHTML= itemDate + " (" + day+")";
