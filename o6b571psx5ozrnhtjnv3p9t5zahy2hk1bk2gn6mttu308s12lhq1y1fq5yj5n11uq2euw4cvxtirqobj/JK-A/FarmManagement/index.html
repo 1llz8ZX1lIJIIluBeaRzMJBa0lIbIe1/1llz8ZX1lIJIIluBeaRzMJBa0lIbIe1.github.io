@@ -69,8 +69,7 @@
 					var  itemFishData =  sheetJsonData.values[i][2];
 					var  itemDate=  sheetJsonData.values[i][3];
 					
-					if ( itemId.length <= 4  && itemId.indexOf("建功A") >= 0 
-						&& itemId.indexOf("建功A9") != 0) {
+					if ( itemId.indexOf("建功A") >= 0 ) {
 						var row = tableRef.insertRow();
 						var cell1 = row.insertCell(0);
 						cell1.style.display = 'none';
@@ -249,10 +248,7 @@
 
 <div class="container">
 
-	<div id="map" align="CENTER">
-	<img src="images/map.jpg" height="100%" height="100%" style="object-fit: cover;"></div><!-- //&callback=initMap-->
-	
-	<div style="height:420px;  position:relative; overflow:auto;margin-top:10px" >
+	<div style="height:650px;  position:relative; overflow:auto;margin-top:10px" >
 	  <table class="table table-hover table-light" style="font-size:10pt;-webkit-user-select:none;-moz-user-select:none;-o-user-select:none;user-select:none;" id="tableID">
         <thead class="thead-dark">
           <tr id="header-row">
