@@ -220,7 +220,14 @@
 						if  (itemFishData.indexOf("萬尾")>=0)
 						{
 							// 用300克的杯子
-							feed = (/\d+(?=萬尾)/.exec(itemFishData) * feedMul / 30 ).toFixed(1)+ "";
+							var pattern1 = /\d+\.\d+(?=萬尾)/;
+							var numCheck=pattern1.exec(itemFishData); // 檢查是否為小數點
+							if  (numCheck == null)
+							{
+								numCheck = /\d+(?=萬尾)/.exec(itemFishData); // 若不是小數點則判斷是否為整數
+							}
+							feed = ( numCheck * feedMul / 30 ).toFixed(1)+ "";
+							//feed = (/\d+(?=萬尾)/.exec(itemFishData) * feedMul / 30 ).toFixed(1)+ "";
 							if (day>20)
 							{
 								feed += " 搬池";
